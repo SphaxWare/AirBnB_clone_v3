@@ -66,6 +66,35 @@ test_db_storage.py'])
                              "{:s} method needs a docstring".format(func[0]))
             self.assertTrue(len(func[1].__doc__) >= 1,
                             "{:s} method needs a docstring".format(func[0]))
+    def test_get_existing_object(self):
+        # Test getting an existing object from storage
+        state_id = 'existing_state_id'
+        state_name = 'Test State'
+        # Assuming 'State' is a model in the database
+        state = State(id=state_id, name=state_name)
+        storage.save(state)
+        
+        db_storage = DBStorage()
+        retrieved_state = db_storage.get(State, state_id)
+        self.assertEqual(retrieved_state.name, state_name)
+
+    def test_get_non_existing_object(self):
+        # Test getting a non-existing object from storage
+        db_storage = DBStorage()
+        retrieved_state = db_storage.get(State, 'non_existing_id')
+        self.assertIsNone(retrieved_state)
+
+    def test_count_all_objects(self):
+        # Test counting all objects in storage
+        db_storage = DBStorage()
+        total_count = db_storage.count()
+        self.assertEqual(total_count, expected_total_count)
+
+    def test_count_objects_of_specific_class(self):
+        # Test counting objects of a specific class in storage
+        db_storage = DBStorage()
+        state_count = db_storage.count(State)
+        self.assertEqual(state_count, expected_state_count)
 
 
 class TestFileStorage(unittest.TestCase):
