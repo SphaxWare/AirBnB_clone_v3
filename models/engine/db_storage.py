@@ -77,9 +77,11 @@ class DBStorage:
 
     def get(self, cls, id):
         """method to get 1 object"""
-        for clss  in classes:
-            if cls is None or cls is classes[clss] or cls is clss:
-                objs = self.__session.query(classes[clss]).filter_by(id=id).first()
+        for c in classes:
+            if cls is None or cls is classes[c] or cls is c:
+                objs = self.__session.query(classes[c])
+                .filter_by(id=id)
+                .first()
                 return objs
         return None
 
@@ -93,4 +95,3 @@ class DBStorage:
         else:
             count = len(models.storage.all(cls).values())
         return count
-
