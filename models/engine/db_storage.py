@@ -79,9 +79,9 @@ class DBStorage:
         """method to get 1 object"""
         for c in classes:
             if cls is None or cls is classes[c] or cls is c:
-                objs = self.__session.query(classes[c])
-                .filter_by(id=id)
-                .first()
+                objs = self.__session.query(classes[c]) \
+                                     .filter_by(id=id) \
+                                     .first()
                 return objs
         return None
 
