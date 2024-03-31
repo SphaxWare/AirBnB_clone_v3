@@ -6,4 +6,5 @@ from . import app_views
 
 @app_views.route('/status', trict_slashes=False)
 def get_status():
+    """Return API Status"""
     return jsonify({"status": "OK"})
