@@ -21,8 +21,8 @@ def teardown_appcontext(exception):
 
 if __name__ == "__main__":
     """Main function"""
-    host = environ.get('HBNB_API_HOST')
-    port = environ.get('HBNB_API_PORT')
+    host = os.getenv('HBNB_API_HOST')
+    port = os.getenv('HBNB_API_PORT')
     if not host:
         host = '0.0.0.0'
     if not port:
